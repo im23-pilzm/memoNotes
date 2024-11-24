@@ -1,0 +1,111 @@
+*{
+    font-family: 'Inter', sans-serif;
+}
+
+body{
+    margin: 0;
+}
+
+.register_page_header{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 8px;
+    margin-right: 8px;
+}
+
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo p{
+    font-size: 24px;
+}
+
+.circle{
+    background-color: #FFF540;
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
+}
+
+.register_page_main_section{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.register_page_rectangle{
+
+    justify-content: center;
+    background: #EEE758;
+    height: 630px;
+    width: 620px;
+    border-radius: 10px;
+}
+
+.register_page_rectangle_inner_text{
+    font-size: 40px;
+    text-align: center;
+    height: min-content;
+    margin-top: 74px;
+    background: #EEE758;
+}
+
+#register_input_fields{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 85px 84px 136px 84px;
+}
+
+
+#register_input_fields_email{
+    margin-bottom: 59px;
+    background: #EEE758;
+}
+
+#register_input_fields_email input{
+    width: 452px;
+    height: 30px;
+    background-color: #FCFCBD;
+    border-style: none;
+    border-radius: 5px;
+}
+
+#register_input_fields_password{
+    margin-bottom: 59px;
+    background: #EEE758;
+}
+
+#register_input_fields_password input{
+    width: 452px;
+    height: 30px;
+    background-color: #FCFCBD;
+    border-style: none;
+    border-radius: 5px;
+}
+
+#register_input_fields_password_confirmation{
+    margin-bottom: 59px;
+    background: #EEE758;
+}
+
+#register_input_fields_password_confirmation input{
+    width: 452px;
+    height: 30px;
+    background-color: #FCFCBD;
+    border-style: none;
+    border-radius: 5px;
+}
+
+#register_input_fields button{
+    width: 133px;
+    height: 30px;
+    align-self: center;
+    border-style: none;
+    border-radius: 5px;
+    background-color: #FCFCBD;
+}
