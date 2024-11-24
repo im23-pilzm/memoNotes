@@ -5,6 +5,7 @@
     <title>Deine Notizen</title>
     <link rel="stylesheet" href="memoNotes_yourNotes.css">
 </head>
+
 <body>
 <header class="register_page_header">
   <div class="logo">
@@ -12,17 +13,32 @@
     <p><b>MemoNotes</b></p>
   </div>
 </header>
+
 <section>
   <h1 id="yourNotes_Title">Deine Notizen</h1>
 </section>
-<section id="yourNotes_TODO">
-  <div id="yourNotes_TODO_rectangle">
-    <form>
-      <input type="checkbox" alt="yourTODO" value="Hausaufgaben machen">
-    </form>
-  </div>
+
+<section id="yourNotes_main">
+
+    <section id="yourNotes_TODO">
+        <div id="yourNotes_TODO_rectangle">
+            <form>
+                <input type="checkbox" alt="TODO" id="TODO_task">
+                <label for="TODO_task">Hausaufgaben machen</label>
+                <br><input type="button" alt="add_TODO" id="add_TODO_task" value="+ Neue TODO">
+            </form>
+        </div>
+    </section>
+
+    <section id="yourNotes_notes">
+        <div id="yourNotes_notes_oneNote">
+
+        </div>
+        <input type="button" alt="add_Note" id="add_new_note">
+    </section>
 
 </section>
+
 
 </body>
 </html>
