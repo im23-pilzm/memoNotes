@@ -30,3 +30,87 @@ body{
     width: 25px;
     height: 25px;
 }
+
+#yourNotes_main{
+    display: flex;
+    justify-content: space-between;
+}
+
+#yourNotes_TODO{
+    width: 25%;
+}
+
+#yourNotes_TODO_Title{
+    margin-left: 8px;
+}
+
+#yourNotes_TODO_rectangle{
+    background-color: lightgrey;
+    height: 700px;
+    width: 340px;
+    border-radius: 8px;
+    margin-left: 8px;
+    padding: 8px;
+}
+
+#yourNotes_Notes{
+    margin-right: 8px;
+    width: 75%;
+    margin-left: 70px;
+}
+
+#yourNotes_Notes_allNotes{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-left: -20px;
+    margin-top: -20px;
+}
+
+#example_note{
+    border: solid black;
+    border-radius: 10px;
+    height: 330px;
+    width: 350px;
+    margin: 20px;
+}
+
+#example_note_1{
+    border: solid black;
+    border-radius: 10px;
+    height: 330px;
+    width: 350px;
+    margin: 20px;
+}
+
+#example_note_2{
+    border: solid black;
+    border-radius: 10px;
+    height: 330px;
+    width: 350px;
+    margin: 20px;
+}
+
+#example_note_3{
+    border: solid black;
+    border-radius: 10px;
+    height: 330px;
+    width: 350px;
+    margin: 20px;
+}
+
+#example_note_4{
+    border: solid black;
+    border-radius: 10px;
+    height: 330px;
+    width: 350px;
+    margin: 20px;
+}
+
+#example_note_5{
+    border: solid black;
+    border-radius: 10px;
+    height: 330px;
+    width: 350px;
+    margin: 20px;
+}
