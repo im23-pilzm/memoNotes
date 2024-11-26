@@ -6,7 +6,7 @@ body{
     margin: 0;
 }
 
-.landing_page_header{
+#register_page_header{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -14,24 +14,25 @@ body{
     margin-right: 8px;
 }
 
-
-.logo{
+#logo{
     display: flex;
     align-items: center;
+    text-decoration: none;
+    color: inherit;
 }
 
-.logo p{
+#logo p{
     font-size: 24px;
 }
 
-.circle{
+#circle{
     background-color: #FFF540;
     border-radius: 50%;
     width: 25px;
     height: 25px;
 }
 
-.LogIn{
+#LogIn{
     border-style: none;
     padding: 5.5px 21.5px;
     font-size: 15px;
@@ -39,7 +40,7 @@ body{
     background-color: white;
 }
 
-.SignIn{
+#SignIn{
     border-style: none;
     padding: 5.5px 20px;
     background-color: #FFF540;
@@ -47,11 +48,11 @@ body{
     font-size: 15px;
 }
 
-.LogIn:hover{
+#LogIn:hover{
     color: lightgrey;
 }
 
-.SignIn:hover{
+#SignIn:hover{
     background-color: #C3BC40;
 }
 
