@@ -5,6 +5,7 @@
     <title>Deine Notizen</title>
     <link rel="stylesheet" href="memoNotes_yourNotes.css">
     <script type="text/javascript" src="memoNotes_yourNotes.js" defer></script>
+    <script src="https://kit.fontawesome.com/0396450bdf.js" crossorigin="anonymous"></script>
 </head>
 <body>
 <header id="register_page_header">
@@ -19,9 +20,9 @@
     <div id="yourNotes_TODO">
         <h2 id="yourNotes_TODO_Title">TODO-Liste</h2>
         <div id="yourNotes_TODO_rectangle">
-            <form>
-                <input type="checkbox" alt="yourTODO" value="Hausaufgaben machen" id="example_task">
-                <label for="example_task">HA machen</label>
+            <form id="yourNotes_Notes_TODO_form">
+                <div id="yourNotes_Notes_TODO_list"></div>
+                <button id="add_TODO_button"><i class="fa-solid fa-plus"></i>&nbsp;TODO hinzufügen</button>
             </form>
         </div>
     </div>
@@ -41,7 +42,11 @@
             <label for="example_note_4"></label>
             <input type="text" alt="first_note" id="example_note_5" value="Die erste Notiz">
             <label for="example_note_5"></label>
+            <button type="button" id="add_Note_button">
+                <i class="fa-regular fa-pen-to-square"></i>
+            </button>
         </form>
+
 
     </div>
 </section>
