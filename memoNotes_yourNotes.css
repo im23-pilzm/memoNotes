@@ -81,7 +81,7 @@ body{
 
 #yourNotes_Notes{
     margin-right: 8px;
-    width: 75%;
+    width: 80%;
     margin-left: 70px;
 }
 
@@ -92,9 +92,16 @@ body{
     margin-left: -20px;
     margin-top: -20px;
     margin-right:-8px;
+    position: relative;
 }
 
-#example_note{
+#yourNotes_Notes_allNotes_list{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.note_container{
     border: solid black;
     border-radius: 10px;
     height: 330px;
@@ -102,44 +109,9 @@ body{
     margin: 20px;
 }
 
-#example_note_1{
-    border: solid black;
-    border-radius: 10px;
-    height: 330px;
-    width: 350px;
-    margin: 20px;
-}
-
-#example_note_2{
-    border: solid black;
-    border-radius: 10px;
-    height: 330px;
-    width: 350px;
-    margin: 20px;
-}
-
-#example_note_3{
-    border: solid black;
-    border-radius: 10px;
-    height: 330px;
-    width: 350px;
-    margin: 20px;
-}
-
-#example_note_4{
-    border: solid black;
-    border-radius: 10px;
-    height: 330px;
-    width: 350px;
-    margin: 20px;
-}
-
-#example_note_5{
-    border: solid black;
-    border-radius: 10px;
-    height: 330px;
-    width: 350px;
-    margin: 20px;
+.note-title{
+    font-weight: bold;
+    font-size: xxx-large;
 }
 
 #add_Note_button{
@@ -147,7 +119,12 @@ body{
     width: 50px;
     height: 50px;
     background-color: white;
-    align-self: flex-end;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    transform: translate(0, -56px);
 }
 
 #add_Note_button:hover{

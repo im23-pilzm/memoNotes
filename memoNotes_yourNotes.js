@@ -73,8 +73,96 @@ addTODOButton.addEventListener("click", (event) => {
 });
 
 
-//create new Note-Element
+//calculate positioning of the addNoteButton
+const notesContainer = document.getElementById("yourNotes_Notes_allNotes");
+const addNoteButton = document.getElementById("add_Note_button");
 
+function updateButtonPosition() {
+    const notes = notesContainer.querySelectorAll('input[type="text"]');
+
+    if (notes.length === 0) {
+        // Keine Notizen: Button bleibt unter dem Titel
+        addNoteButton.style.position = 'relative';
+        addNoteButton.style.marginTop = '70px';
+        addNoteButton.style.marginLeft = '15px'
+        addNoteButton.style.top = 'auto';
+        addNoteButton.style.left = '0';
+    } else {
+        // Mindestens eine Notiz: Button dynamisch platzieren
+        addNoteButton.style.position = 'absolute';
+        addNoteButton.style.display = 'block';
+
+        const lastNote = notes[notes.length - 1];
+        const lastNoteRect = lastNote.getBoundingClientRect();
+        const containerRect = notesContainer.getBoundingClientRect();
+
+        addNoteButton.style.top = `${lastNoteRect.top - containerRect.top + lastNoteRect.height + 10}px`;
+        addNoteButton.style.left = `${lastNoteRect.left - containerRect.left + lastNoteRect.width + 10}px`;
+    }
+}
+
+// Initialer Aufruf und bei Änderungen im Container
+notesContainer.addEventListener('input', updateButtonPosition);
+notesContainer.addEventListener('DOMNodeInserted', updateButtonPosition);
+notesContainer.addEventListener('DOMNodeRemoved', updateButtonPosition);
+
+// Initialisierung
+updateButtonPosition();
+
+// Bei Fenstergröße-Änderung erneut berechnen
+window.addEventListener('resize', updateButtonPosition);
+
+const NoteList = document.getElementById("yourNotes_Notes_allNotes_list")
+
+//create new Note-Element
+function createNewNote(title = "Titel") {
+    const NoteContainer = document.createElement("div");
+    NoteContainer.classList.add("note_container");
+
+    const NoteTitle = document.createElement("span");
+    NoteTitle.classList.add("note-title");
+    NoteTitle.textContent = title;
+
+    const hiddenNoteInput = document.createElement("input");
+    hiddenNoteInput.type = "hidden";
+    hiddenNoteInput.name = "note_title[]";
+    hiddenNoteInput.value = NoteTitle.textContent;
+
+    NoteTitle.addEventListener("click", () => {
+        const NoteInput = document.createElement("input");
+        NoteInput.type = "text";
+        NoteInput.value = NoteTitle.textContent;
+
+        NoteContainer.replaceChild(NoteInput, NoteTitle);
+
+        const saveChanges = () => {
+            const updatedNoteTitle = NoteInput.value || "Titel";
+            NoteTitle.textContent = updatedNoteTitle;
+            hiddenNoteInput.value = updatedNoteTitle;
+            NoteContainer.replaceChild(NoteTitle, NoteInput);
+        };
+
+        NoteInput.addEventListener("blur", saveChanges);
+        NoteInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") {
+                saveChanges();
+            }
+        });
+
+        NoteInput.focus();
+    });
+
+    NoteContainer.appendChild(NoteTitle);
+    NoteContainer.appendChild(hiddenNoteInput);
+
+    NoteList.appendChild(NoteContainer);
+}
+
+// Event-Listener für den Button
+addNoteButton.addEventListener("click", (event) => {
+    event.preventDefault();
+    createNewNote();
+});
 
 
 
