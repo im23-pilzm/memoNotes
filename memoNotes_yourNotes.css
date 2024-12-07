@@ -109,22 +109,38 @@ body{
     margin: 20px;
 }
 
-.note-title{
+.noteTitle{
     font-weight: bold;
     font-size: xxx-large;
 }
 
+.NoteInput{
+    border: none;
+    outline: none;
+    max-width: 95%;
+    margin-left: 6px;
+}
+
+.NoteInput[type="text"]:focus{
+    border: none;
+    box-shadow: none;
+    font-size: xxx-large;
+    font-weight: bold;
+}
+
 #add_Note_button{
-    border-radius: 50%;
+    position: absolute;
     width: 50px;
     height: 50px;
+    border-radius: 50%;
     background-color: white;
-    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
-    transform: translate(0, -56px);
+}
+
+.InputTitle{
+    border-style: none;
 }
 
 #add_Note_button:hover{
