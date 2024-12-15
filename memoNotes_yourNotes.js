@@ -127,8 +127,7 @@ function createNewNote(title = "Titel") {
     hiddenNoteInput.value = NoteTitle.textContent;
 
     NoteTitle.addEventListener("click", () => {
-        const NoteInput = document.createElement("input");
-        NoteInput.type = "text";
+        const NoteInput = document.createElement("textarea");
         NoteInput.value = NoteTitle.textContent;
         NoteInput.classList.add("NoteInput")
 
@@ -140,6 +139,7 @@ function createNewNote(title = "Titel") {
             NoteTitle.textContent = updatedNoteTitle;
             hiddenNoteInput.value = updatedNoteTitle;
             NoteContainer.replaceChild(NoteTitle, NoteInput);
+            NoteTitle.innerHTML = NoteInput.value.trim().replace(/\n/g, "<br>")
         };
 
         NoteInput.addEventListener("blur", saveChanges);
@@ -163,15 +163,6 @@ addNoteButton.addEventListener("click", (event) => {
     createNewNote();
     updateButtonPosition();
 });
-
-
-
-
-
-
-
-
-
 
 
 

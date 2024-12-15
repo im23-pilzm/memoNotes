@@ -111,21 +111,36 @@ body{
 
 .noteTitle{
     font-weight: bold;
-    font-size: xxx-large;
+    font-size: 3rem;
+    display: inline-block;
+    white-space: pre-wrap;
+    margin: 0 6px;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
-.NoteInput{
+.NoteInput {
     border: none;
     outline: none;
     max-width: 95%;
     margin-left: 6px;
+    max-height: 325px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    word-break: break-word;
 }
 
-.NoteInput[type="text"]:focus{
+.NoteInput::-webkit-scrollbar{
+    display: none;
+}
+
+.NoteInput:focus{
     border: none;
     box-shadow: none;
-    font-size: xxx-large;
+    font-size: 3rem;
     font-weight: bold;
+    height: 325px;
 }
 
 #add_Note_button{
