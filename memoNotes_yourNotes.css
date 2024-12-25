@@ -107,6 +107,7 @@ body{
     height: 330px;
     width: 350px;
     margin: 20px;
+    position: relative;
 }
 
 .noteTitle{
@@ -114,10 +115,109 @@ body{
     font-size: 3rem;
     display: inline-block;
     white-space: pre-wrap;
-    margin: 0 6px;
+    margin: 10px 6px;
     overflow-wrap: break-word;
     word-break: break-word;
+    z-index: 2;
 }
+
+.NoteOptionsButton{
+    border: none;
+    font-size: 25px;
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
+    margin-top: 0;
+    transition: font-size 0.3s ease;
+    z-index: 1;
+    background-color: transparent;
+}
+
+.NoteOptionsButton:hover{
+    font-size: 28px;
+}
+
+.NoteOptionsContainer{
+    position: absolute;
+    top: 7%;
+    right: 0;
+    display: none;
+    background-color: white;
+    border: none;
+    border-radius: 5px;
+    min-width: 100px;
+    z-index: 1000;
+}
+
+.NoteOptionsContainer button{
+    display: flex;
+    justify-content: space-between;
+    right: 3%;
+    padding: 0.5rem 0.5rem;
+    cursor: pointer;
+    background-color: transparent;
+    border: solid 0.5px;
+    width: 100%;
+}
+
+.NoteOptionsContainer button:hover{
+    background-color: lightgrey;
+}
+
+.NoteOptionsContainer button:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.NoteOptionsContainer button:last-child{
+    margin-top: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+}
+
+.ColorButton{
+    display: flex;
+    flex-direction: column;
+}
+
+.colorContainer {
+    display: flex;
+    gap: 10px;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: white;
+}
+
+.colorOption {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 2px solid black;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.colorOption:hover {
+    transform: scale(1.2);
+}
+
+.yellow{
+    background-color: #fff36b;
+
+}
+
+.green{
+    background-color: #76ff5a;
+}
+
+.blue{
+    background-color: #3cffff;
+}
+
+.pink{
+    background-color: #fc83ff;
+}
+
 
 .NoteInput {
     border: none;

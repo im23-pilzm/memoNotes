@@ -10,6 +10,7 @@ logo.addEventListener("click", ()=>{
 const addTODOButton = document.getElementById("add_TODO_button")
 const TODOlist = document.getElementById("yourNotes_Notes_TODO_list")
 
+
 function createNewTODO(text = "Neue Aufgabe") {
     const container = document.createElement("div");
     container.classList.add("todo_container");
@@ -111,6 +112,7 @@ notesContainer.addEventListener("DOMNodeRemoved", updateButtonPosition);
 window.addEventListener("resize", updateButtonPosition);
 
 const NoteList = document.getElementById("yourNotes_Notes_allNotes_list")
+let NoteColorOptions = ["#fff36b", "#76ff5a", "#3cffff", "#fc83ff"]
 
 //create new Note-Element
 function createNewNote(title = "Titel") {
@@ -120,6 +122,23 @@ function createNewNote(title = "Titel") {
     const NoteTitle = document.createElement("span");
     NoteTitle.classList.add("noteTitle");
     NoteTitle.textContent = title;
+
+    const NoteOptionsButton = document.createElement("button")
+    NoteOptionsButton.classList.add("fa-solid", "fa-ellipsis")
+    NoteOptionsButton.classList.add("NoteOptionsButton")
+    NoteOptionsButton.setAttribute("aria-label", "Optionen anzeigen")
+    NoteOptionsButton.setAttribute("aria-hidden", "false")
+
+    const NoteOptionsContainer = document.createElement("div")
+    NoteOptionsContainer.classList.add("NoteOptionsContainer")
+
+    const ColorButton = document.createElement("button")
+    ColorButton.classList.add("ColorButton")
+    ColorButton.innerText = "Farbe auswählen..."
+
+    const DeleteNoteButton = document.createElement("button")
+    DeleteNoteButton.classList.add("DeleteNoteButton")
+    DeleteNoteButton.innerText = "Notiz löschen"
 
     const hiddenNoteInput = document.createElement("input");
     hiddenNoteInput.type = "hidden";
@@ -152,10 +171,58 @@ function createNewNote(title = "Titel") {
         NoteInput.focus();
     });
 
+    NoteOptionsButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        const isVisible = NoteOptionsContainer.style.display === "block";
+        NoteOptionsContainer.style.display = isVisible ? "none" : "block";
+
+    });
+
+    DeleteNoteButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        NoteContainer.remove();
+    })
+
+    ColorButton.addEventListener("click", (event) => {
+        event.preventDefault();
+        console.log("ColorButton wurde geklickt!");
+
+        const existingColorContainer = ColorButton.querySelector(".colorContainer");
+        if (existingColorContainer) {
+            existingColorContainer.remove();
+            ColorButton.innerText = "Farbe auswählen..."
+            ColorButton.style.display = "block"
+            return;
+        }
+
+        const colorContainer = document.createElement("div");
+        colorContainer.classList.add("colorContainer");
+
+        NoteColorOptions.forEach(color => {
+            const colorElement = document.createElement("div");
+            colorElement.style.backgroundColor = color;
+            colorElement.classList.add("colorOption");
+
+            colorElement.addEventListener("click", () => {
+                NoteContainer.style.backgroundColor = color;
+                colorContainer.remove();
+                ColorButton.innerText = "Farbe auswählen...";
+            });
+
+            colorContainer.appendChild(colorElement);
+        });
+
+        ColorButton.appendChild(colorContainer);
+    });
+
+
     NoteContainer.appendChild(NoteTitle);
     NoteContainer.appendChild(hiddenNoteInput);
-
-    NoteList.appendChild(NoteContainer)
+    NoteContainer.appendChild(NoteOptionsButton);
+    NoteContainer.appendChild(NoteOptionsContainer);
+    NoteOptionsContainer.appendChild(ColorButton);
+    NoteOptionsContainer.appendChild(DeleteNoteButton);
+    NoteList.appendChild(NoteContainer);
 }
 
 addNoteButton.addEventListener("click", (event) => {
@@ -163,42 +230,3 @@ addNoteButton.addEventListener("click", (event) => {
     createNewNote();
     updateButtonPosition();
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
