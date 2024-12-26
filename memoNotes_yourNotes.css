@@ -223,12 +223,13 @@ body{
     border: none;
     outline: none;
     max-width: 95%;
-    margin-left: 6px;
-    max-height: 325px;
+    margin: 10px 6px;
+    max-height: 316px;
     overflow-y: auto;
     white-space: pre-wrap;
     overflow-wrap: break-word;
     word-break: break-word;
+    resize: none;
 }
 
 .NoteInput::-webkit-scrollbar{

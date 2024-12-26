@@ -112,10 +112,11 @@ notesContainer.addEventListener("DOMNodeRemoved", updateButtonPosition);
 window.addEventListener("resize", updateButtonPosition);
 
 const NoteList = document.getElementById("yourNotes_Notes_allNotes_list")
+
 let NoteColorOptions = ["#fff36b", "#76ff5a", "#3cffff", "#fc83ff"]
 
 //create new Note-Element
-function createNewNote(title = "Titel") {
+function createNewNote(title = "Titel...") {
     const NoteContainer = document.createElement("div");
     NoteContainer.classList.add("note_container");
 
@@ -152,13 +153,17 @@ function createNewNote(title = "Titel") {
 
         NoteContainer.replaceChild(NoteInput, NoteTitle);
 
+        NoteInput.style.backgroundColor = NoteContainer.style.backgroundColor;
 
         const saveChanges = () => {
-            const updatedNoteTitle = NoteInput.value || "Titel";
-            NoteTitle.textContent = updatedNoteTitle;
-            hiddenNoteInput.value = updatedNoteTitle;
-            NoteContainer.replaceChild(NoteTitle, NoteInput);
-            NoteTitle.innerHTML = NoteInput.value.trim().replace(/\n/g, "<br>")
+            const updatedNoteTitle = NoteInput.value.trim()
+            if (updatedNoteTitle) {
+                NoteTitle.textContent = updatedNoteTitle;
+                hiddenNoteInput.value = updatedNoteTitle;
+                NoteContainer.replaceChild(NoteTitle, NoteInput);
+                NoteTitle.style.backgroundColor = NoteContainer.style.backgroundColor;
+                NoteTitle.innerHTML = NoteInput.value.trim().replace(/\n/g, "<br>");
+            }
         };
 
         NoteInput.addEventListener("blur", saveChanges);
@@ -171,21 +176,30 @@ function createNewNote(title = "Titel") {
         NoteInput.focus();
     });
 
+    document.addEventListener("click", (event) => {
+        const ClickInside = NoteOptionsButton.contains(event.target) || NoteOptionsContainer.contains(event.target);
+        if (!ClickInside) {
+            NoteOptionsContainer.style.display = "none";
+        }
+    })
+
     NoteOptionsButton.addEventListener("click", (event) => {
         event.preventDefault();
         const isVisible = NoteOptionsContainer.style.display === "block";
         NoteOptionsContainer.style.display = isVisible ? "none" : "block";
-
+        event.stopPropagation()
     });
 
     DeleteNoteButton.addEventListener("click", (event) => {
         event.preventDefault();
         NoteContainer.remove();
+        updateButtonPosition()
     })
 
     ColorButton.addEventListener("click", (event) => {
         event.preventDefault();
         console.log("ColorButton wurde geklickt!");
+
 
         const existingColorContainer = ColorButton.querySelector(".colorContainer");
         if (existingColorContainer) {
@@ -205,9 +219,16 @@ function createNewNote(title = "Titel") {
 
             colorElement.addEventListener("click", () => {
                 NoteContainer.style.backgroundColor = color;
-                colorContainer.remove();
-                ColorButton.innerText = "Farbe auswählen...";
-            });
+                const NoteInput = NoteContainer.querySelector("textarea")
+                if (NoteInput) {
+                NoteInput.style.backgroundColor = color;
+                }
+
+                const NoteTitle = NoteContainer.querySelector(".noteTitle");
+                if (NoteTitle) {
+                    NoteTitle.style.backgroundColor = color;
+                }
+            })
 
             colorContainer.appendChild(colorElement);
         });
