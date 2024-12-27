@@ -115,6 +115,20 @@ const NoteList = document.getElementById("yourNotes_Notes_allNotes_list")
 
 let NoteColorOptions = ["#fff36b", "#76ff5a", "#3cffff", "#fc83ff"]
 
+let updatedNoteInput = ""
+
+function closeNote() {
+    const note_text = document.getElementById("note_text");
+    if (note_text) {
+        updatedNoteInput = note_text.value.trim();
+    }
+
+    const popupContainer = document.getElementById("popupContainer");
+    if (popupContainer) {
+        popupContainer.remove();
+    }
+}
+
 //create new Note-Element
 function createNewNote(title = "Titel...") {
     const NoteContainer = document.createElement("div");
@@ -136,6 +150,10 @@ function createNewNote(title = "Titel...") {
     const ColorButton = document.createElement("button")
     ColorButton.classList.add("ColorButton")
     ColorButton.innerText = "Farbe auswählen..."
+
+    const AlterNoteButton = document.createElement("button")
+    AlterNoteButton.classList.add("AlterNoteButton")
+    AlterNoteButton.innerText = "Notiz bearbeiten"
 
     const DeleteNoteButton = document.createElement("button")
     DeleteNoteButton.classList.add("DeleteNoteButton")
@@ -196,6 +214,22 @@ function createNewNote(title = "Titel...") {
         updateButtonPosition()
     })
 
+    AlterNoteButton.addEventListener("click", (event) => {
+        event.preventDefault()
+        const popupContainer = document.createElement("div");
+        popupContainer.innerHTML = `
+        <div id="popupContainer">
+            <h1>${NoteTitle.textContent}</h1>
+            <textarea id="note_text" placeholder="Enter your note...">${updatedNoteInput}</textarea>
+            <div>
+                <buton id="CloseNote" class="fa-solid fa-xmark" onclick="closeNote()"></buton>
+            </div>
+        </div> 
+        `;
+        document.body.appendChild(popupContainer)
+    })
+
+
     ColorButton.addEventListener("click", (event) => {
         event.preventDefault();
         console.log("ColorButton wurde geklickt!");
@@ -236,12 +270,12 @@ function createNewNote(title = "Titel...") {
         ColorButton.appendChild(colorContainer);
     });
 
-
     NoteContainer.appendChild(NoteTitle);
     NoteContainer.appendChild(hiddenNoteInput);
     NoteContainer.appendChild(NoteOptionsButton);
     NoteContainer.appendChild(NoteOptionsContainer);
     NoteOptionsContainer.appendChild(ColorButton);
+    NoteOptionsContainer.appendChild(AlterNoteButton)
     NoteOptionsContainer.appendChild(DeleteNoteButton);
     NoteList.appendChild(NoteContainer);
 }
