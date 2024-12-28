@@ -115,12 +115,13 @@ const NoteList = document.getElementById("yourNotes_Notes_allNotes_list")
 
 let NoteColorOptions = ["#fff36b", "#76ff5a", "#3cffff", "#fc83ff"]
 
-let updatedNoteInput = ""
+let notesContent = {};
 
 function closeNote() {
-    const note_text = document.getElementById("note_text");
-    if (note_text) {
-        updatedNoteInput = note_text.value.trim();
+    const noteTextArea = document.getElementById("note_text");
+    if (noteTextArea) {
+        const noteID = noteTextArea.getAttribute("data_note_id")
+        notesContent[noteID] = noteTextArea.value.trim();
     }
 
     const popupContainer = document.getElementById("popupContainer");
@@ -164,6 +165,9 @@ function createNewNote(title = "Titel...") {
     hiddenNoteInput.name = "note_title[]";
     hiddenNoteInput.value = NoteTitle.textContent;
 
+    const noteID = `note_${Date.now()}`
+    notesContent[noteID] = ""
+
     NoteTitle.addEventListener("click", () => {
         const NoteInput = document.createElement("textarea");
         NoteInput.value = NoteTitle.textContent;
@@ -177,6 +181,7 @@ function createNewNote(title = "Titel...") {
             const updatedNoteTitle = NoteInput.value.trim()
             if (updatedNoteTitle) {
                 NoteTitle.textContent = updatedNoteTitle;
+                notesContent[noteID] = updatedNoteTitle
                 hiddenNoteInput.value = updatedNoteTitle;
                 NoteContainer.replaceChild(NoteTitle, NoteInput);
                 NoteTitle.style.backgroundColor = NoteContainer.style.backgroundColor;
@@ -216,17 +221,34 @@ function createNewNote(title = "Titel...") {
 
     AlterNoteButton.addEventListener("click", (event) => {
         event.preventDefault()
+
+        if (document.getElementById("popupContainer")) return;
+
+
         const popupContainer = document.createElement("div");
+
+        const currentNoteContent = notesContent[noteID] || ""
+
         popupContainer.innerHTML = `
         <div id="popupContainer">
             <h1>${NoteTitle.textContent}</h1>
-            <textarea id="note_text" placeholder="Enter your note...">${updatedNoteInput}</textarea>
+            <textarea id="note_text" data-note-id="${noteID}" placeholder="Enter your note...">${currentNoteContent}</textarea>
             <div>
-                <buton id="CloseNote" class="fa-solid fa-xmark" onclick="closeNote()"></buton>
+                <buton id="CloseNote" class="fa-solid fa-xmark"></buton>
             </div>
         </div> 
         `;
         document.body.appendChild(popupContainer)
+
+        document.getElementById("CloseNote").addEventListener("click", () => {
+            const noteTextArea = document.getElementById("note_text")
+            if (noteTextArea) {
+                const noteID = noteTextArea.getAttribute("data-note-id");
+                notesContent[noteID] = noteTextArea.value.trim();
+            }
+
+            popupContainer.remove();
+        })
     })
 
 
