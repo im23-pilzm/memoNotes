@@ -38,6 +38,8 @@ body{
     font-size: 15px;
     border-radius: 8px;
     background-color: white;
+    text-decoration: none;
+    color: black;
 }
 
 #SignIn{
@@ -46,6 +48,8 @@ body{
     background-color: #FFF540;
     border-radius: 8px;
     font-size: 15px;
+    text-decoration: none;
+    color: black;
 }
 
 #LogIn:hover{
