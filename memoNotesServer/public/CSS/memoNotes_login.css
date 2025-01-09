@@ -6,7 +6,7 @@ body{
     margin: 0;
 }
 
-#register_page_header{
+#login_page_header{
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -34,13 +34,13 @@ body{
 }
 
 
-.register_page_main_section{
+.login_page_main_section{
     display: flex;
     justify-content: center;
     margin-top: 50px;
 }
 
-.register_page_rectangle{
+.login_page_rectangle{
 
     justify-content: center;
     background: #EEE758;
@@ -49,7 +49,7 @@ body{
     border-radius: 10px;
 }
 
-.register_page_rectangle_inner_text{
+.login_page_rectangle_inner_text{
     font-size: 40px;
     text-align: center;
     height: min-content;
@@ -57,7 +57,7 @@ body{
     background: #EEE758;
 }
 
-#register_input_fields{
+#login_input_fields{
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -65,12 +65,12 @@ body{
 }
 
 
-#register_input_fields_email{
+#login_input_fields_email{
     margin-bottom: 59px;
     background: #EEE758;
 }
 
-#register_input_fields_email input{
+#login_input_fields_email input{
     width: 452px;
     height: 30px;
     background-color: #FCFCBD;
@@ -78,12 +78,12 @@ body{
     border-radius: 5px;
 }
 
-#register_input_fields_password{
-    margin-bottom: 59px;
+#login_input_fields_password{
+    margin-bottom: 0;
     background: #EEE758;
 }
 
-#register_input_fields_password input{
+#login_input_fields_password input{
     width: 452px;
     height: 30px;
     background-color: #FCFCBD;
@@ -91,9 +91,10 @@ body{
     border-radius: 5px;
 }
 
-#register_input_fields button{
+#login_input_fields button{
     width: 133px;
     height: 30px;
+    margin-top: 130px;
     align-self: center;
     border-style: none;
     border-radius: 5px;

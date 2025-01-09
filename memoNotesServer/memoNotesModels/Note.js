@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Note = sequelize.define("Note", {
+    const Notes = sequelize.define("Notes", {
         note_id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
@@ -25,5 +25,5 @@ module.exports = (sequelize, DataTypes) => {
         timestamps: false
     });
 
-    return Note;
+    return Notes;
 };
