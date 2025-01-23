@@ -7,7 +7,6 @@ require("dotenv").config();
 
 router.post("/register", async (req, res) => {
     const { email, password, password_confirmation } = req.body;
-    console.log(req)
     console.log("Received data:", { email, password, password_confirmation });
 
     if (!email || !password || !password_confirmation) {

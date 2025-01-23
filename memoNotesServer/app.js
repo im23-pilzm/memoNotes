@@ -1,6 +1,4 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
 const path = require("path")
 const { sequelize } = require('./memoNotesModels');
 const authRoutes = require('./memoNotesRoutes/auth');
@@ -8,9 +6,8 @@ const todoRoutes = require('./memoNotesRoutes/TODOs');
 const noteRoutes = require('./memoNotesRoutes/Notes');
 
 const app = express();
-
-app.use(cors());
-app.use(bodyParser.json());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use('/auth', authRoutes);
