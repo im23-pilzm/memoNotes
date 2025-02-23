@@ -1,9 +1,11 @@
 const express = require('express');
-const path = require("path")
+const path = require("path");
+require("dotenv").config();
 const { sequelize } = require('./memoNotesModels');
 const authRoutes = require('./memoNotesRoutes/auth');
 const todoRoutes = require('./memoNotesRoutes/TODOs');
 const noteRoutes = require('./memoNotesRoutes/Notes');
+const authMiddleware = require('./memoNotesMiddleware/authMiddleware')
 
 const app = express();
 app.use(express.json());
@@ -26,7 +28,7 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'memoNotes_login.html'));
 });
 
-app.get('/yourNotes', (req, res) => {
+app.get('/yourNotes', authMiddleware, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'memoNotes_yourNotes.html'));
 });
 

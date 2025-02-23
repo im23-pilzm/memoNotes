@@ -1,9 +1,10 @@
 const logo = document.getElementById("logo")
 
-logo.addEventListener("click", ()=>{
+import {fetchProtecData} from "./api.js";
+
+logo.addEventListener("click", () => {
     window.location.href = "memoNotes_landingpage.html"
 })
-
 
 
 //create new TODO-Element
@@ -277,7 +278,7 @@ function createNewNote(title = "Titel...") {
                 NoteContainer.style.backgroundColor = color;
                 const NoteInput = NoteContainer.querySelector("textarea")
                 if (NoteInput) {
-                NoteInput.style.backgroundColor = color;
+                    NoteInput.style.backgroundColor = color;
                 }
 
                 const NoteTitle = NoteContainer.querySelector(".noteTitle");
@@ -307,3 +308,13 @@ addNoteButton.addEventListener("click", (event) => {
     createNewNote();
     updateButtonPosition();
 });
+
+
+fetchProtecData()
+    .then(() => {
+        console.log('Data fetched successfully');
+    })
+    .catch(error => {
+        console.error('Error fetching data:', error);
+    });
+
