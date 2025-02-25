@@ -67,29 +67,7 @@ body{
 }
 
 
-.landing_page_section_post_it_img{
-    position: relative;
-}
 
-.landing_page_section_post_it_img img{
-    width: 300px;
-    height: auto;
-    max-width: 100%;
-    transform: rotate(5.63deg);
-    margin-right: 100px;
-}
-
-.landing_page_section_post_it_img_inner{
-    position: absolute;
-    transform: rotate(5.63deg);
-    font-size: 25px;
-    bottom: 38%;
-    right: 30%;
-}
-
-.landing_page_section_post_it_img_inner_text{
-    display: block;
-}
 
 .landing_page_section_lower_img{
     height: 600px;
@@ -98,10 +76,37 @@ body{
     margin-top: 40px;
 }
 
-.landing_page_section_lower_img img{
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+.landing_page_section_lower_icons{
+    display: flex;
+    margin-left: 100px;
+    margin-top: 40px;
+}
+
+.landing_page_section_lower_icons img{
+    height: 400px;
+    width: auto;
+}
+
+.landing_page_section_lower_icons div:nth-child(2) img{
+    margin-left: 100px;
+}
+
+.TODO_Icon_Text{
+    display: flex;
+}
+
+.TODO_Icon_Text p{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.Note_Icon{
+    display: flex;
+}
+
+.Note_Icon p{
+    font-size: 40px;
+    font-weight: bold;
 }
 
 .landing_page_section_upper_sec{
