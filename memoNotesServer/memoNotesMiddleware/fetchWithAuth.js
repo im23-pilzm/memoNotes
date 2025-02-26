@@ -8,7 +8,7 @@ async function fetchWithAuth(url, options = {}) {
     }
 
     if (!options.headers) options.headers = {};
-    options.headers["Authorization"] = `Bearer ${accessToken}`;
+    options.headers["authorization"] = `Bearer ${accessToken}`;
 
     let response = await fetch(url, options);
 
@@ -25,7 +25,7 @@ async function fetchWithAuth(url, options = {}) {
             const { accessToken: newAccessToken } = await refreshResponse.json();
             localStorage.setItem("accessToken", newAccessToken);
 
-            options.headers["Authorization"] = `Bearer ${newAccessToken}`;
+            options.headers["authorization"] = `Bearer ${newAccessToken}`;
             return fetch(url, options);
         } else {
             // Refresh failed, log out user
