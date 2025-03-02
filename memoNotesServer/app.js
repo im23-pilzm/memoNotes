@@ -10,7 +10,9 @@ const authMiddleware = require('./memoNotesMiddleware/authMiddleware')
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
+app.use(express.static(path.join(__dirname, 'memoNotesServer/memoNotesMiddleware')));
 app.use(express.static(path.join(__dirname, "public")));
+
 
 app.use('/auth', authRoutes);
 app.use('/todos', todoRoutes);
@@ -28,7 +30,7 @@ app.get('/login', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'memoNotes_login.html'));
 });
 
-app.get('/yourNotes', authMiddleware, (req, res) => {
+app.get('/user/:user_id/yourNotes', authMiddleware, (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'memoNotes_yourNotes.html'));
 });
 

@@ -50,12 +50,13 @@
         });
 
         if (response.ok) {
-            const { accessToken, refreshToken } = await response.json();
+            const { user_id, accessToken, refreshToken } = await response.json();
 
+            localStorage.setItem('user_id', user_id);
             localStorage.setItem('accessToken', accessToken);
             localStorage.setItem('refreshToken', refreshToken);
 
-            window.location.href = '/yourNotes';
+            window.location.href = `/user/${user_id}/yourNotes`;
         } else {
             const errorData = await response.json();
             alert('Login failed: ' + errorData.error);

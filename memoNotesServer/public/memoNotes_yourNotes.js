@@ -1,16 +1,14 @@
-const logo = document.getElementById("logo")
+const logo = document.getElementById("logo");
 
-import {fetchProtecData} from "./api.js";
+import { fetchProtecData } from "./api.js";
 
 logo.addEventListener("click", () => {
-    window.location.href = "memoNotes_landingpage.html"
-})
+    window.location.href = "memoNotes_landingpage.html";
+});
 
-
-//create new TODO-Element
-const addTODOButton = document.getElementById("add_TODO_button")
-const TODOlist = document.getElementById("yourNotes_Notes_TODO_list")
-
+// Create new TODO-Element
+const addTODOButton = document.getElementById("add_TODO_button");
+const TODOlist = document.getElementById("yourNotes_Notes_TODO_list");
 
 function createNewTODO(text = "Neue Aufgabe") {
     const container = document.createElement("div");
@@ -18,15 +16,15 @@ function createNewTODO(text = "Neue Aufgabe") {
 
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
-    checkbox.name = "todo_done"
+    checkbox.name = "todo_done";
 
     const TODOtext = document.createElement("span");
     TODOtext.classList.add("todo-text");
     TODOtext.textContent = text;
 
     const DeleteTODOButton = document.createElement("button");
-    DeleteTODOButton.classList.add("fa-solid", "fa-trash-can")
-    DeleteTODOButton.classList.add("TODOdeleteButton")
+    DeleteTODOButton.classList.add("fa-solid", "fa-trash-can");
+    DeleteTODOButton.classList.add("TODOdeleteButton");
 
     const hiddenInput = document.createElement("input");
     hiddenInput.type = "hidden";
@@ -37,9 +35,9 @@ function createNewTODO(text = "Neue Aufgabe") {
         const input = document.createElement("input");
         input.type = "text";
         input.value = TODOtext.textContent;
-        input.classList.add("TitleInput")
+        input.classList.add("TitleInput");
 
-        container.replaceChild(input, TODOtext)
+        container.replaceChild(input, TODOtext);
 
         const saveChanges = () => {
             const updatedTODOtext = input.value || "Unbenannte Aufgabe";
@@ -51,7 +49,7 @@ function createNewTODO(text = "Neue Aufgabe") {
         input.addEventListener("blur", saveChanges);
         input.addEventListener("keypress", (e) => {
             if (e.key === "Enter") {
-                saveChanges()
+                saveChanges();
             }
         });
 
@@ -59,22 +57,21 @@ function createNewTODO(text = "Neue Aufgabe") {
     });
 
     DeleteTODOButton.addEventListener("click", () => {
-        container.remove()
-    })
+        container.remove();
+    });
 
     container.appendChild(checkbox);
     container.appendChild(TODOtext);
-    container.appendChild(DeleteTODOButton)
+    container.appendChild(DeleteTODOButton);
     container.appendChild(hiddenInput);
 
-    TODOlist.appendChild(container)
+    TODOlist.appendChild(container);
 }
 
 addTODOButton.addEventListener("click", (event) => {
     event.preventDefault();
     createNewTODO();
 });
-
 
 const notesContainer = document.getElementById("yourNotes_Notes_allNotes");
 const addNoteButton = document.getElementById("add_Note_button");
@@ -105,23 +102,28 @@ function updateButtonPosition() {
 
 updateButtonPosition();
 
-notesContainer.addEventListener("input", updateButtonPosition);
-notesContainer.addEventListener("DOMNodeInserted", updateButtonPosition);
-notesContainer.addEventListener("DOMNodeRemoved", updateButtonPosition);
+const observer = new MutationObserver((mutationsList) => {
+    for (const mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+            updateButtonPosition();
+        }
+    }
+});
 
+observer.observe(notesContainer, { childList: true, subtree: true });
 
 window.addEventListener("resize", updateButtonPosition);
 
-const NoteList = document.getElementById("yourNotes_Notes_allNotes_list")
+const NoteList = document.getElementById("yourNotes_Notes_allNotes_list");
 
-let NoteColorOptions = ["#fff36b", "#76ff5a", "#3cffff", "#fc83ff"]
+let NoteColorOptions = ["#fff36b", "#76ff5a", "#3cffff", "#fc83ff"];
 
 let notesContent = {};
 
 function closeNote() {
     const noteTextArea = document.getElementById("note_text");
     if (noteTextArea) {
-        const noteID = noteTextArea.getAttribute("data_note_id")
+        const noteID = noteTextArea.getAttribute("data_note_id");
         notesContent[noteID] = noteTextArea.value.trim();
     }
 
@@ -131,7 +133,7 @@ function closeNote() {
     }
 }
 
-//create new Note-Element
+// Create new Note-Element
 function createNewNote(title = "Titel...") {
     const NoteContainer = document.createElement("div");
     NoteContainer.classList.add("note_container");
@@ -140,49 +142,49 @@ function createNewNote(title = "Titel...") {
     NoteTitle.classList.add("noteTitle");
     NoteTitle.textContent = title;
 
-    const NoteOptionsButton = document.createElement("button")
-    NoteOptionsButton.classList.add("fa-solid", "fa-ellipsis")
-    NoteOptionsButton.classList.add("NoteOptionsButton")
-    NoteOptionsButton.setAttribute("aria-label", "Optionen anzeigen")
-    NoteOptionsButton.setAttribute("aria-hidden", "false")
+    const NoteOptionsButton = document.createElement("button");
+    NoteOptionsButton.classList.add("fa-solid", "fa-ellipsis");
+    NoteOptionsButton.classList.add("NoteOptionsButton");
+    NoteOptionsButton.setAttribute("aria-label", "Optionen anzeigen");
+    NoteOptionsButton.setAttribute("aria-hidden", "false");
 
-    const NoteOptionsContainer = document.createElement("div")
-    NoteOptionsContainer.classList.add("NoteOptionsContainer")
+    const NoteOptionsContainer = document.createElement("div");
+    NoteOptionsContainer.classList.add("NoteOptionsContainer");
 
-    const ColorButton = document.createElement("button")
-    ColorButton.classList.add("ColorButton")
-    ColorButton.innerText = "Farbe auswählen..."
+    const ColorButton = document.createElement("button");
+    ColorButton.classList.add("ColorButton");
+    ColorButton.innerText = "Farbe auswählen...";
 
-    const AlterNoteButton = document.createElement("button")
-    AlterNoteButton.classList.add("AlterNoteButton")
-    AlterNoteButton.innerText = "Notiz bearbeiten"
+    const AlterNoteButton = document.createElement("button");
+    AlterNoteButton.classList.add("AlterNoteButton");
+    AlterNoteButton.innerText = "Notiz bearbeiten";
 
-    const DeleteNoteButton = document.createElement("button")
-    DeleteNoteButton.classList.add("DeleteNoteButton")
-    DeleteNoteButton.innerText = "Notiz löschen"
+    const DeleteNoteButton = document.createElement("button");
+    DeleteNoteButton.classList.add("DeleteNoteButton");
+    DeleteNoteButton.innerText = "Notiz löschen";
 
     const hiddenNoteInput = document.createElement("input");
     hiddenNoteInput.type = "hidden";
     hiddenNoteInput.name = "note_title[]";
     hiddenNoteInput.value = NoteTitle.textContent;
 
-    const noteID = `note_${Date.now()}`
-    notesContent[noteID] = ""
+    const noteID = `note_${Date.now()}`;
+    notesContent[noteID] = "";
 
     NoteTitle.addEventListener("click", () => {
         const NoteInput = document.createElement("textarea");
         NoteInput.value = NoteTitle.textContent;
-        NoteInput.classList.add("NoteInput")
+        NoteInput.classList.add("NoteInput");
 
         NoteContainer.replaceChild(NoteInput, NoteTitle);
 
         NoteInput.style.backgroundColor = NoteContainer.style.backgroundColor;
 
         const saveChanges = () => {
-            const updatedNoteTitle = NoteInput.value.trim()
+            const updatedNoteTitle = NoteInput.value.trim();
             if (updatedNoteTitle) {
                 NoteTitle.textContent = updatedNoteTitle;
-                notesContent[noteID] = updatedNoteTitle
+                notesContent[noteID] = updatedNoteTitle;
                 hiddenNoteInput.value = updatedNoteTitle;
                 NoteContainer.replaceChild(NoteTitle, NoteInput);
                 NoteTitle.style.backgroundColor = NoteContainer.style.backgroundColor;
@@ -205,64 +207,61 @@ function createNewNote(title = "Titel...") {
         if (!ClickInside) {
             NoteOptionsContainer.style.display = "none";
         }
-    })
+    });
 
     NoteOptionsButton.addEventListener("click", (event) => {
         event.preventDefault();
         const isVisible = NoteOptionsContainer.style.display === "block";
         NoteOptionsContainer.style.display = isVisible ? "none" : "block";
-        event.stopPropagation()
+        event.stopPropagation();
     });
 
     DeleteNoteButton.addEventListener("click", (event) => {
         event.preventDefault();
         NoteContainer.remove();
-        updateButtonPosition()
-    })
+        updateButtonPosition();
+    });
 
     AlterNoteButton.addEventListener("click", (event) => {
-        event.preventDefault()
+        event.preventDefault();
 
         if (document.getElementById("popupContainer")) return;
 
-
         const popupContainer = document.createElement("div");
 
-        const currentNoteContent = notesContent[noteID] || ""
+        const currentNoteContent = notesContent[noteID] || "";
 
         popupContainer.innerHTML = `
         <div id="popupContainer">
             <h1>${NoteTitle.textContent}</h1>
             <textarea id="note_text" data-note-id="${noteID}" placeholder="Enter your note...">${currentNoteContent}</textarea>
             <div>
-                <buton id="CloseNote" class="fa-solid fa-xmark"></buton>
+                <buton id="CloseNote" class="fa-solid fa-xmark" onclick="closeNote()"></buton>
             </div>
-        </div> 
+        </div>
         `;
-        document.body.appendChild(popupContainer)
+        document.body.appendChild(popupContainer);
 
         document.getElementById("CloseNote").addEventListener("click", () => {
-            const noteTextArea = document.getElementById("note_text")
+            const noteTextArea = document.getElementById("note_text");
             if (noteTextArea) {
                 const noteID = noteTextArea.getAttribute("data-note-id");
                 notesContent[noteID] = noteTextArea.value.trim();
             }
 
             popupContainer.remove();
-        })
-    })
-
+        });
+    });
 
     ColorButton.addEventListener("click", (event) => {
         event.preventDefault();
         console.log("ColorButton wurde geklickt!");
 
-
         const existingColorContainer = ColorButton.querySelector(".colorContainer");
         if (existingColorContainer) {
             existingColorContainer.remove();
-            ColorButton.innerText = "Farbe auswählen..."
-            ColorButton.style.display = "block"
+            ColorButton.innerText = "Farbe auswählen...";
+            ColorButton.style.display = "block";
             return;
         }
 
@@ -276,7 +275,7 @@ function createNewNote(title = "Titel...") {
 
             colorElement.addEventListener("click", () => {
                 NoteContainer.style.backgroundColor = color;
-                const NoteInput = NoteContainer.querySelector("textarea")
+                const NoteInput = NoteContainer.querySelector("textarea");
                 if (NoteInput) {
                     NoteInput.style.backgroundColor = color;
                 }
@@ -285,7 +284,7 @@ function createNewNote(title = "Titel...") {
                 if (NoteTitle) {
                     NoteTitle.style.backgroundColor = color;
                 }
-            })
+            });
 
             colorContainer.appendChild(colorElement);
         });
@@ -298,7 +297,7 @@ function createNewNote(title = "Titel...") {
     NoteContainer.appendChild(NoteOptionsButton);
     NoteContainer.appendChild(NoteOptionsContainer);
     NoteOptionsContainer.appendChild(ColorButton);
-    NoteOptionsContainer.appendChild(AlterNoteButton)
+    NoteOptionsContainer.appendChild(AlterNoteButton);
     NoteOptionsContainer.appendChild(DeleteNoteButton);
     NoteList.appendChild(NoteContainer);
 }
@@ -309,7 +308,6 @@ addNoteButton.addEventListener("click", (event) => {
     updateButtonPosition();
 });
 
-
 fetchProtecData()
     .then(() => {
         console.log('Data fetched successfully');
@@ -318,3 +316,21 @@ fetchProtecData()
         console.error('Error fetching data:', error);
     });
 
+const userId = localStorage.getItem('user_id');
+if (!userId) {
+    console.error('User ID not found in local storage');
+} else {
+    fetch(`/user/${userId}/yourNotes`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error('There was a problem with the fetch operation:', error);
+        });
+}

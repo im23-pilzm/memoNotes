@@ -2,7 +2,7 @@ const express = require('express');
 const { Note } = require('../memoNotesModels');
 const router = express.Router();
 
-router.get('/:user_id', async (req, res) => {
+router.get('/user/:user_id/yourNotes', async (req, res) => {
     const { user_id } = req.params;
     try {
         const notes = await Note.findAll({ where: { user_id } });

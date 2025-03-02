@@ -59,7 +59,9 @@ router.post('/login', async (req, res) => {
 
         res.cookie('authorization', `${accessToken}`, { httpOnly: true, secure: true });
         res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true });
-        res.status(201).json({message: 'Login successful'});
+
+
+        res.redirect(`/user/${user.user_id}/yourNotes`);
     } catch (err) {
         res.status(500).json({error: err.message});
     }
@@ -89,7 +91,7 @@ router.post("/refresh_token", (req, res) => {
     }
 })
 
-router.get('/yourNotes', authMiddleware, (req, res) => {
+router.get('/user/:user_id/yourNotes', authMiddleware, (req, res) => {
     // Handle the request and respond with the notes
     res.json({message: 'Here are your notes'});
 });
