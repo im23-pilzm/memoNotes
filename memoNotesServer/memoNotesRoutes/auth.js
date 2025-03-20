@@ -60,8 +60,12 @@ router.post('/login', async (req, res) => {
         res.cookie('authorization', `${accessToken}`, { httpOnly: true, secure: true });
         res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: true });
 
-
-        res.redirect(`/user/${user.user_id}/yourNotes`);
+        res.status(200).json({
+            message: 'Login successful',
+            user_id: user.user_id,
+            accessToken: accessToken,
+            refreshToken: refreshToken
+        });
     } catch (err) {
         res.status(500).json({error: err.message});
     }
